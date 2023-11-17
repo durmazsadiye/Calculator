@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧮 Calculator 🧮</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    #calculator {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 300px;
+    }
+
+    #screen {
+      background-color: #f0f0f0;
+      padding: 10px;
+      text-align: right;
+      font-size: 24px;
+    }
+
+    #numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    button {
+      width: 100%;
+      height: 60px;
+      font-size: 20px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button.operator {
+      background-color: #f3a537;
+    }
+
+    button.double {
+      grid-column: span 2;
+    }
+
+    button.equal {
+      background-color: #4caf50;
+      color: #ffffff;
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <div id="screen">
+      <input type="text" id="result" readonly>
+    </div>
+    <div id="numbers">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="operator">/</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="operator">*</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="operator">-</button>
+
+      <button class="double">0</button>
+      <button>.</button>
+      <button class="operator">+</button>
+      <button class="equal double" id="calculate">=</button>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+    var result = document.getElementById('result');
+    var buttons = document.querySelectorAll('#numbers button');
+    var clearButton = document.getElementById('calculate');
+
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var value = this.innerHTML;
+
+        if (value === '=') {
+          try {
+            result.value = eval(result.value);
+          } catch (e) {
+            result.value = 'Error';
+          }
+          return;
+        }
+
+        if (value === 'C') {
+          result.value = '';
+          return;
+        }
+
+        result.value += value;
+      });
+    });
+  </script>
+</body>
+</html>
